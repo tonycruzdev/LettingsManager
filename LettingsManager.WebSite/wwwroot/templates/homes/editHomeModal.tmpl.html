@@ -1,0 +1,166 @@
+﻿
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-white bg-info">
+                <h4 class="modal-title" id="exampleModalCenterTitle">Edit Houses</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" data-bind="with: homesSource.currentRecord">
+                <form class="form-horizontal" role="form" id="EditHomeForm">
+                    <div>
+                        <div class="form-group">
+                            <label class="control-label"> Address</label>
+                            <div class="input-group">
+                                <input data-bind="value:address1" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="input-group">
+                                    <input data-bind="value:address2" class="form-control" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="input-group">
+                                    <input data-bind="value:address3" class="form-control" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="input-group">
+                                    <input data-bind="value:address4" class="form-control" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="input-group">
+                                    <input data-bind="value:address5" class="form-control" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin:2px" />
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Tenant 1</label>
+                                <div class="input-group">
+                                    <input data-bind="value:tenant1" class="form-control" required />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-edit"></span></span>
+                                    </div>
+                                    <span data-bind="validationMessage: tenant1" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Tenant 2</label>
+                                <div class="input-group">
+                                    <input data-bind="value:tenant2" class="form-control" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-edit"></span></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr style="margin:2px" />
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Contract Start</label>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" id="editDateFrom" data-bind="value: dateFromFormat, event: {change: $root.dateChange}" class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-calendar"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">End Contract</label>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" id="editDateToFormat" data-bind="value: dateToFormat" class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-calendar"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin:2px" />
+                        <div class="form-group">
+                            <label class="control-label"> Landlord Name</label>
+                            <div class="input-group">
+                                <select data-bind="options:$parent.landlords, optionsText: 'name', optionsValue: 'id', value:landlordId" class="form-control"></select>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-tie"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin:2px" />
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Rent</label>
+                                <div class="input-group">
+                                    <input data-bind="value:rent" class="form-control" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-pound-sign"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Deposit</label>
+                                <div class="input-group">
+                                    <input data-bind="value:deposit" class="form-control" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-pound-sign"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin:2px" />
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Contact Number</label>
+                                <div class="input-group">
+                                    <input data-bind="value:mobile" class="form-control" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-mobile-alt"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Email</label>
+                                <div class="input-group">
+                                    <input data-bind="value:email" class="form-control" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fa fa-envelope"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary float-left" data-dismiss="modal">Close</button>
+                <button type="button" data-bind="click:  $root.saveData" class="btn btn-success g-mr-10 g-mb-15">Save Home</button>
+            </div>
+        </div>
+    </div>
+</div>

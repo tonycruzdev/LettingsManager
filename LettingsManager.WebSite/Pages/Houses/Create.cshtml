@@ -1,0 +1,278 @@
+﻿@page
+@model LettingsManager.WebSite.Houses.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+<form method="post">
+    <div class="row">
+
+        <div class="col">
+            <div class="card mb-2">
+                <div class="card-header">
+                    <h5>Edit Home</h5>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="House.Address1" class="control-label"></label>
+                        <div class="input-group">
+                            <input asp-for="House.Address1" class="form-control" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                            </div>
+
+                        </div>
+                        <span asp-validation-for="House.Address1" class="text-danger"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <input asp-for="House.Address2" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+                            </div>
+                            <span asp-validation-for="House.Address2" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <input asp-for="House.Address3" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+                                <span asp-validation-for="House.Address3" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <input asp-for="House.Address4" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+                            </div>
+                            <span asp-validation-for="House.Address4" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <input asp-for="House.Address5" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+                                
+                            </div>
+                            <span asp-validation-for="House.Address5" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <hr style="margin:6px" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Tenant1" class="control-label">Tenant 1</label>
+                            <div class="input-group">
+                                <input asp-for="House.Tenant1" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-edit"></span></span>
+                                </div>
+                            </div>
+                            <span asp-validation-for="House.Tenant1" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Tenant2" class="control-label">Tenant 2</label>
+                            <div class="input-group">
+                                <input asp-for="House.Tenant2" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-edit"></span></span>
+                                </div>
+                                
+                            </div>
+                            <span asp-validation-for="House.Tenant2" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <hr style="margin:6px" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.DateFrom" class="control-label"></label>
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" asp-for="House.DateFrom" asp-format="{0:dd'/'MM'/'yyyy}" class="form-control">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-calendar"></span></span>
+                                    @*<span class="fas fa-calendar"></span>*@
+                                </div>
+                            </div>
+                            <span asp-validation-for="House.DateFrom" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.DateTo" class="control-label"></label>
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" asp-for="House.DateTo" asp-format="{0:dd'/'MM'/'yyyy}" class="form-control">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-calendar"></span></span>
+                                </div>
+                            </div>
+                            <span asp-validation-for="House.DateTo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="House.LandlordId" class="control-label"> Landlord Name</label>
+                        <div class="input-group">
+                            <select asp-for="House.LandlordId" class="form-control" asp-items="ViewBag.LandlordId"></select>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-tie"></span></span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="House.LandlordId" class="text-danger"></span>
+                    </div>
+                    <hr style="margin:6px" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Rent" class="control-label"></label>
+                            <div class="input-group">
+                                <input asp-for="House.Rent" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-pound-sign"></span></span>
+                                </div>
+                                
+                            </div>
+                            <span asp-validation-for="House.Rent" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Deposit" class="control-label"></label>
+                            <div class="input-group">
+                                <input asp-for="House.Deposit" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-pound-sign"></span></span>
+                                </div>
+                                
+                            </div>
+                            <span asp-validation-for="House.Deposit" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <hr style="margin:6px" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Mobile" class="control-label"></label>
+                            <div class="input-group">
+                                <input asp-for="House.Mobile" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-mobile-alt"></span></span>
+                                </div>
+                                
+                            </div>
+                            <span asp-validation-for="House.Mobile" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Email" class="control-label"></label>
+                            <div class="input-group">
+                                <input asp-for="House.Email" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-envelope"></span></span>
+                                </div>
+                            </div>
+                            <span asp-validation-for="House.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                        <div class="col pull-right">
+                            <a asp-page="./Index" class="btn btn-primary float-right">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/moment.js/moment.js"></script>
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script>
+        $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+        $.fn.datepicker.defaults.autoclose = true;
+        $.fn.datepicker.defaults.todayHighlight = true;
+        $(function () {
+            $('#House_DateFrom').datepicker()
+                .change(function (event) {
+                    console.log(event);
+                    const date = moment(event.target.value, 'DD-MM-YYYY');
+                    const addOneYear = moment(date).add(1, 'years')
+                    const showDateTo = moment(addOneYear._d).format("DD/MM/YYYY")
+                    $('#House_DateTo').val(showDateTo)
+                    console.log(showDateTo);
+                });
+            //$("#step2").hide();
+            //$("#step3").hide();
+            //$("#step4").hide();
+            //$("#step5").hide();
+            //$("#step6").hide();
+
+            //$("#step1Next").click(function (event) {
+            //    event.preventDefault();
+            //    $("#step1").hide();
+            //    $("#step2").show();
+            //});
+            //$("#step2Next").click(function () {
+            //    event.preventDefault();
+            //    $("#step2").hide();
+            //    $("#step3").show();
+            //});
+            //$("#step3Next").click(function () {
+            //    event.preventDefault();
+            //    $("#step3").hide();
+            //    $("#step4").show();
+            // });
+            //$("#step4Next").click(function () {
+            //    event.preventDefault();
+            //    $("#step4").hide();
+            //    $("#step5").show();
+            // });
+            //$("#step5Next").click(function () {
+            //     event.preventDefault();
+            //    $("#step5").hide();
+            //    $("#step6").show();
+            //});
+            //$("#step2prev").click(function (event) {
+            //    event.preventDefault();
+            //    $("#step2").hide();
+            //    $("#step1").show();
+            //});
+            // $("#step3prev").click(function (event) {
+            //    event.preventDefault();
+            //    $("#step3").hide();
+            //    $("#step2").show();
+            // });
+            //$("#step4prev").click(function (event) {
+            //    event.preventDefault();
+            //    $("#step4").hide();
+            //    $("#step3").show();
+            //});
+            //$("#step5prev").click(function (event) {
+            //    event.preventDefault();
+            //    $("#step5").hide();
+            //    $("#step4").show();
+            //});
+            //$("#step6prev").click(function (event) {
+            //    event.preventDefault();
+            //    $("#step6").hide();
+            //    $("#step5").show();
+            //});
+            //
+        })
+
+
+    </script>
+
+
+}

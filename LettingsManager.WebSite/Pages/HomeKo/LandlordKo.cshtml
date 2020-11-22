@@ -1,0 +1,139 @@
+﻿@page
+@model LettingsManager.WebSite.Pages.HomeKo.LandlordKoModel
+@{
+    ViewData["Title"] = "Landlord Knockout js";
+}
+<link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
+<div class="g-pa-20">
+    <div class="card mb-2">
+        <div class="card-header">
+            <h3>Landlord List</h3>
+        </div>
+    </div>
+
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button data-bind="click: $data.showAddDialogBox" class="btn btn-primary" type="button" id="button-addon1"><i class="fa fa-plus-circle"></i></button>
+            <div class="btn btn-primary"><i class="fas fa-search"></i></div>
+        </div>
+        <input type="text" data-bind="value: landlordSource.nameFilter, valueUpdate:'afterkeydown'" class="form-control" placeholder="Address or Tenant">
+    </div>
+
+    <br />
+    <div class="table-responsive g-mb-40">
+        <div class="spinner" id="spinkit">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+        <table class="table u-table--v3 g-color-black">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th class="d-none d-sm-table-cell">Address</th>
+                    <th class="d-none d-sm-table-cell">Mobile</th>
+                    <th class="d-none d-sm-table-cell">email</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- ko foreach: landlordSource.displaySource -->
+                <tr>
+                    <td data-bind="text:name"></td>
+                    <td class="d-none d-sm-table-cell"><span data-bind="text:address1"></span></td>
+                    <td class="d-none d-sm-table-cell"><span data-bind="text: mobile"> </span></td>
+                    <td class="d-none d-sm-table-cell"><span data-bind="text: email"> </span></td>
+                    <td style="text-align: right">
+                        <a title="Edit" data-bind="click: $parent.showEditDialogBox" href="#"><i class="fa fa-edit"></i></a> |
+                        <a data-bind="click: $parent.showLandlordHomesDialogBox" href="#" title="Print"><i class="fas fa-th"></i></a> |
+                        <a data-bind="click: $parent.showDeleteDialogBox" href="#" title="Delete"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                <!-- /ko -->
+
+            </tbody>
+        </table>
+        <br />
+        <!-- ko if: landlordSource.dataSource().length > landlordSource.itemPerPage() -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li data-bind="css: { disabled: $root.landlordSource.currentPage() === 0}" class="page-item">
+                   <a class="page-link" href="#" data-bind="click: landlordSource.previeusPage">Previous</a>
+                </li>
+                <li class="page-item" data-bind="css: { disabled: landlordSource.currentPage() + 1 === landlordSource.pageCount() }">
+                   <a class="page-link" href="#" data-bind="click: landlordSource.nextPage">Next</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /ko -->
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/knockout-3.5.1.js"></script>
+    <script src="~/lib/koExternalTemplateEngine_all.js"></script>
+    <script src="~/lib/knockout.validation.js"></script>
+    <script src="~/lib/moment.js/moment.js"></script>
+    <script src="~/lib/lodash.js"></script>
+    <script src="~/lib/toastr/toastr.min.js"></script>
+
+    <script src="~/app/helpers/DataServices.js"></script>
+    <script src="~/app/helpers/DataSourceManager.js"></script>
+    <script src="~/app/landlords/LandlordVM.js"></script>
+    <script src="~/app/houses/HouseVM.js"></script>
+    <script src="~/app/landlords/LandlordsController.js"></script>
+
+    @*<script src="~/app/ajaxhelper.js"></script>
+    <script src="~/app/landlordVM.js"></script>
+    <script src="~/app/homesVM.js"></script>
+    <script src="~/app/dataSouce.js"></script>
+    <script src="~/app/manageLandlordController.js"></script>*@
+    <script>
+        $(function () {
+            infuser.defaults.templateSuffix = '.tmpl.html';
+            infuser.defaults.templateUrl = '/templates';
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+           //app. manageLandlordController.init();
+            var landlords = new app.landlordInit();  
+        });
+    </script>
+
+}
+
+<div data-bind="template: { name: 'deleteLandlordModal', data: $root }">
+
+</div>
+
+<div data-bind="template: { name: 'editLandlordModal', data: $root }">
+
+
+</div>
+
+
+<div data-bind="template: { name: 'addNewLandlordModal', data: $root }">
+
+
+</div>
+<div data-bind="template: { name: 'landlordHousesModal', data: $root }">
+
+</div>

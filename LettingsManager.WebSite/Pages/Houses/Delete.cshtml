@@ -1,0 +1,116 @@
+﻿@page
+@model LettingsManager.WebSite.Houses.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<form method="post">
+    <div class="row">
+
+        <div class="col">
+            <div class="card  mb-2">
+                <div class="card-header text-white bg-danger">
+                    <h5> Are you sure you want to delete this House?</h5>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="House.Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="House.Address1"  class="control-label"></label>
+                        <div class="input-group">
+                            <input asp-for="House.Address1" disabled class="form-control" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                            </div>
+                            <span asp-validation-for="House.Address1" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @*<label asp-for="House.Address2" class="control-label"></label>*@
+                            <div class="input-group">
+                                <input asp-for="House.Address2" disabled class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text"  id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+                                <span asp-validation-for="House.Address2" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @*<label asp-for="House.Address3" class="control-label"></label>*@
+                            <div class="input-group">
+                                <input asp-for="House.Address3" disabled class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+                                <span asp-validation-for="House.Address3" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @*<label asp-for="House.Address4" class="control-label"></label>*@
+                            <div class="input-group">
+                                <input asp-for="House.Address4" disabled class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+                                <span asp-validation-for="House.Address4" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <input asp-for="House.Address5" disabled class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+                                <span asp-validation-for="House.Address5" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr style="margin:6px" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Tenant1" class="control-label">Tenant 1</label>
+                            <div class="input-group">
+                                <input asp-for="House.Tenant1" disabled class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-edit"></span></span>
+                                </div>
+                                <span asp-validation-for="House.Tenant1" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Tenant2"  class="control-label">Tenant 2</label>
+                            <div class="input-group">
+                                <input asp-for="House.Tenant2" disabled class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-edit"></span></span>
+                                </div>
+                                <span asp-validation-for="House.Tenant2" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </div>
+                        <div class="col pull-right">
+                            <a asp-page="./Index" class="btn btn-primary float-right">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+

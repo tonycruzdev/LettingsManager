@@ -1,0 +1,101 @@
+﻿@page "{handler?}"
+@model LettingsManager.WebSite.Landlords.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="card mb-2">
+    <div class="card-header">
+        <h3>Landlord List</h3>
+    </div>
+</div>
+
+<form asp-page="./Index" method="get">
+
+    <div class="input-group mb-3">
+        <input type="text" name="SearchString" value="@Model.CurrentFilter"   class="form-control">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-outline-primary">Search by Name</button>
+            <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+                <a asp-page="Create" class="dropdown-item">Create New</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a asp-page="./Index" class="dropdown-item">Back to full List</a>
+            </div>
+        </div>
+
+    </div>
+</form>
+<div class="table-responsive g-mb-40">
+  <table class="table u-table--v3 g-color-black">
+      <thead>
+          <tr>
+              <th>
+                  <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                     asp-route-currentFilter="@Model.CurrentFilter">
+                      @Html.DisplayNameFor(model => model.Landlord[0].Name)
+                  </a>
+              </th>
+              <th class="d-none d-sm-table-cell">
+                  Address
+              </th>
+              <th>
+                  Mobile
+              </th>
+              <th class="d-none d-sm-table-cell">
+                  Email
+              </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          @foreach (var item in Model.Landlord)
+          {
+              <tr>
+                  <td>
+                      @Html.DisplayFor(modelItem => item.Name)
+                  </td>
+                  <td class="d-none d-sm-table-cell">
+                      @Html.DisplayFor(modelItem => item.Address1)
+                  </td>
+                  <td>
+                      @Html.DisplayFor(modelItem => item.Mobile)
+                  </td>
+                  <td class="d-none d-sm-table-cell">
+                      @Html.DisplayFor(modelItem => item.Email)
+                  </td>
+                  <td>
+                      <a asp-page="./Edit" asp-route-id="@item.Id" title="Edit"><i class="fa fa-edit"></i></a> |
+                      <a asp-page="./Details" asp-route-id="@item.Id" title="Details"><i class="fas fa-th"></i></a> |
+                      <a asp-page="./Delete" asp-route-id="@item.Id" title="Delete"><i class="far fa-trash-alt"></i></a>
+                  </td>
+              </tr>
+          }
+      </tbody>
+  </table>
+
+</div>
+
+@{
+    var prevDisabled = !Model.Landlord.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Landlord.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Landlord.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Landlord.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>

@@ -1,0 +1,150 @@
+﻿@page
+@model LettingsManager.WebSite.Pages.HomeKo.indexModel
+@{
+    ViewData["Title"] = "index";
+}
+<link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+<link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
+<div class="g-pa-20">
+    <div class="card mb-2">
+        <div class="card-header">
+            <h3>House List</h3>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button data-bind="click: $root.showAddDialogBox" class="btn btn-primary" type="button" id="button-addon1"><i class="fa fa-plus-circle"></i></button>
+            <div class="btn btn-primary"><i class="fas fa-search"></i></div>
+        </div>
+        <input type="text" data-bind="value: homesSource.nameFilter, valueUpdate:'afterkeydown'" class="form-control" placeholder="Address or Tenant">
+    </div>
+
+    <br />
+    <div class="table-responsive g-mb-40">
+        <div class="spinner" id="spinkit">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+        <table class="table u-table--v3 g-color-black">
+            <thead>
+                <tr>
+                    <th>Address</th>
+                    <th class="d-none d-sm-table-cell">Tenant</th>
+                    <th class="d-none d-sm-table-cell">From</th>
+                    <th class="d-none d-sm-table-cell">To</th>
+                    <th>Rent</th>
+                    <th></th>
+                    <th></th>
+                    <th class="d-none d-sm-table-cell"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- ko foreach: homesSource.displaySource -->
+                <tr>
+                    <td><span data-bind="text: address1"></span></td>
+                    <td><span data-bind="text: tenant1"></td>
+                    <td class="d-none d-sm-table-cell"><span data-bind="text: dateFromFormat"> </span></td>
+                    <td class="d-none d-sm-table-cell"><span data-bind="text: dateToFormat"> </span></td>
+                    <td data-bind="text: $root.formatCurrency(rent)"></td>
+                    <td style="text-align: right">
+                        <a title="Edit" data-bind="click: $parent.showEditDialogBox" href="#"><i class="fas fa-edit"></i></a>
+
+                    </td>
+                    <td style="text-align: right">
+                        <a data-bind="click: $parent.showDeleteDialogBox" href="#" title="Delete"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                    <td class="d-none d-sm-table-cell" style="text-align: right">
+                        <a data-bind="click: $parent.showPrintDialogBox" href="#" title="Print"><i class="fas fa-print"></i></a>
+                    </td>
+                </tr>
+                <!-- /ko -->
+
+            </tbody>
+        </table>
+        <br />
+        <!-- ko if: homesSource.dataSource().length > homesSource.itemPerPage() -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li data-bind="css: { disabled: $root.homesSource.currentPage() === 0}" class="page-item">
+                    <a class="page-link" href="#" data-bind="click: homesSource.previeusPage">Previous</a>
+                </li>
+                <li class="page-item" data-bind="css: { disabled: homesSource.currentPage() + 1 === homesSource.pageCount() }">
+
+                    <a class="page-link" href="#" data-bind="click: homesSource.nextPage">Next</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /ko -->
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/lib/knockout-3.5.1.js"></script>
+    <script src="~/lib/koExternalTemplateEngine_all.js"></script>
+    <script src="~/lib/knockout.validation.js"></script>
+    <script src="~/lib/moment.js/moment.js"></script>
+    <script src="~/lib/toastr/toastr.min.js"></script>
+    <script src="~/lib/lodash.js"></script>
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script src="~/app/helpers/DataServices.js"></script>
+    <script src="~/app/helpers/DataSourceManager.js"></script>
+    <script src="~/app/landlords/LandlordVM.js"></script>
+    <script src="~/app/houses/HouseVM.js"></script>
+    <script src="~/app/houses/HouseController.js"></script>
+
+    <script>
+        $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+        $.fn.datepicker.defaults.autoclose = true;
+        $.fn.datepicker.defaults.todayHighlight = true;
+        $(function () {
+            infuser.defaults.templateSuffix = '.tmpl.html';
+            infuser.defaults.templateUrl = '/templates/homes';
+            toastr.options = {
+                "newestOnTop": true, "progressBar": true, "positionClass": "toast-bottom-right",
+                "showDuration": "300", "hideDuration": "1000", "timeOut": "5000",
+                "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear",
+                "showMethod": "fadeIn", "hideMethod": "fadeOut"
+            }
+            var homeApp = new app.HomeControllerInit();
+
+            $('#dateFrom').datepicker();
+            $('#dateTo').datepicker();
+            $('#editDateToFormat').datepicker();
+            $('#editDateFrom').datepicker()
+                .change(function (event) {
+                    console.log(event);
+                    const date = moment(event.target.value, 'DD-MM-YYYY');
+                    const addOneYear = moment(date).add(1, 'years')
+                    const showDateTo = moment(addOneYear._d).format("DD/MM/YYYY")
+                    $('#editDateToFormat').val(showDateTo)
+                    console.log(showDateTo);
+                });
+            //
+
+        });
+    </script>
+
+}
+
+<div data-bind="template: { name: 'addNewHomeModal', data: $root }">
+
+</div>
+
+<div data-bind="template: { name: 'deleteHomeModal', data: $root }">
+
+</div>
+
+<div data-bind="template: { name: 'editHomeModal', data: $root }">
+
+</div>
+
+<div data-bind="template: { name: 'printHomeModal', data: $root }">
+
+</div>

@@ -1,0 +1,29 @@
+﻿
+@if (ManagePagination.PageCount > 0)
+{
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ManagePagination.CurrentPage == 0)
+            {
+                <li class="page-item disabled"><a class="page-link">First</a></li>
+                <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                <li class="page-item"><a class="page-link" @onclick="ManagePagination.NextPage">Next</a></li>
+                <li class="page-item"><a class="page-link" @onclick="ManagePagination.LastPage">Last</a></li>
+            }
+            else if (ManagePagination.CurrentPage > 0 && ManagePagination.CurrentPage <= ManagePagination.PageCount - 2)
+            {
+                <li class="page-item"><a class="page-link" @onclick="ManagePagination.FirstPage">First</a></li>
+                <li class="page-item"><a class="page-link" @onclick="ManagePagination.PreviousPage">Previous</a></li>
+                <li class="page-item"><a class="page-link" @onclick="ManagePagination.NextPage">Next</a></li>
+                <li class="page-item"><a class="page-link" @onclick="ManagePagination.LastPage">Last</a></li>
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" @onclick="ManagePagination.FirstPage">First</a></li>
+                <li class="page-item"><a class="page-link" @onclick="ManagePagination.PreviousPage">Previous</a></li>
+                <li class="page-item disabled"><a class="page-link" @onclick="ManagePagination.NextPage">Next</a></li>
+                <li class="page-item disabled"><a class="page-link" @onclick="ManagePagination.LastPage">Last</a></li>
+            }
+        </ul>
+    </nav>
+}

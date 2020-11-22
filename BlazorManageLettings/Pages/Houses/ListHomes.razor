@@ -1,0 +1,125 @@
+﻿@page "/listhomes"
+<style>
+    a { cursor: pointer;  }
+</style>
+<div class="card mb-2">
+    <div class="card-header">
+        <h3>House List</h3>
+    </div>
+</div>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <button @onclick="AddnewHome" class="btn btn-primary" type="button" id="button-addon1"><i class="fa fa-plus-circle"></i></button>
+        <button @onclick="Search" class="btn btn-primary"><i class="fas fa-search"></i></button>
+    </div>
+    <input type="text" @bind-value="@Searchtxt" class="form-control" placeholder="Address or Tenant">
+</div>
+@if(IsLoading)
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary spinner-border-lg" style="width: 4rem; height: 4rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+}
+else
+{
+<div class="table-responsive g-mb-40">
+    <table class="table u-table--v3 g-color-black">
+        <thead>
+            <tr>
+                <th>
+                    Address
+                </th>
+
+                <th class="d-none d-sm-table-cell">
+                    Tenant
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    Start From
+
+                </th>
+
+                <th>
+                    Rent
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    Deposit
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    Mobile
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in DisplaySource)
+            {
+                <tr>
+                    <td>
+                        @item.Address1
+                    </td>
+
+                    <td class="d-none d-sm-table-cell">
+                        @item.Tenant1
+                    </td>
+
+                    <td class="d-none d-sm-table-cell">
+                        @String.Format("{0:dd/MM/yyyy}", item.DateFrom)
+                    </td>
+                    <td>
+                        @String.Format("{0:C}", item.Rent)
+                    </td>
+                    <td class="d-none d-sm-table-cell">
+                        @String.Format("{0:C}", item.Deposit)
+                    </td>
+                    <td class="d-none d-sm-table-cell">
+                        @item.Mobile
+                    </td>
+
+                    <td style="text-align: right">
+                        <a href="editHouse/@item.Id" title="Edit"><i class="fa fa-edit"></i></a>
+                    </td>
+                    <td class="d-none d-sm-table-cell" style="text-align: right">
+                        <a href="detailHouse/@item.Id" title="Print"><i class="fas fa-print"></i></a>
+                    </td>
+                    <td style="text-align: right">
+                        <a href="deleteHouse/@item.Id" title="Delete"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (PageCount > ItemPerPage)
+    {
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (CurrentPage == 0)
+                {
+                    <li class="page-item disabled"><a class="page-link">First</a></li>
+                    <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                    <li class="page-item"><a class="page-link" @onclick="NextPage">Next</a></li>
+                    <li class="page-item"><a class="page-link" @onclick="LastPage">Last</a></li>
+                }
+                else if (CurrentPage > 0 && CurrentPage <= PageCount - 2)
+                {
+                    <li class="page-item"><a class="page-link" @onclick="FirstPage">First</a></li>
+                    <li class="page-item"><a class="page-link" @onclick="PreviousPage">Previous</a></li>
+                    <li class="page-item"><a class="page-link" @onclick="NextPage">Next</a></li>
+                    <li class="page-item"><a class="page-link" @onclick="LastPage">Last</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" @onclick="FirstPage">First</a></li>
+                    <li class="page-item"><a class="page-link" @onclick="PreviousPage">Previous</a></li>
+                    <li class="page-item disabled"><a class="page-link" @onclick="NextPage">Next</a></li>
+                    <li class="page-item disabled"><a class="page-link" @onclick="LastPage">Last</a></li>
+                }
+            </ul>
+        </nav>
+    }
+
+</div>
+}
+

@@ -1,0 +1,21 @@
+models
+  houses
+  landlords
+
+
+  House
+    id
+    address1
+    address2
+    address3
+    address4
+    address5
+    tenant1
+    tenant2
+    dateFrom
+    dateTo
+    landlordId
+    rent
+    deposit
+    mobileNo
+    email

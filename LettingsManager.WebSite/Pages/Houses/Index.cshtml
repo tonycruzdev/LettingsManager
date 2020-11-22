@@ -1,0 +1,126 @@
+﻿@page
+@model LettingsManager.WebSite.Houses.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="card mb-2">
+    <div class="card-header">
+        <h3>House List</h3>
+    </div>
+</div>
+
+<form asp-page="./Index" method="get">
+
+    <div class="input-group mb-3">
+        <input type="text" name="SearchString" value="@Model.CurrentFilter" class="form-control">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-outline-primary">Search Address or Tenant</button>
+            <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+                <a asp-page="Create" class="dropdown-item">Create New</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a asp-page="./Index" class="dropdown-item">Back to full List</a>
+            </div>
+        </div>
+
+    </div>
+</form>
+<div class="table-responsive g-mb-40">
+  <table class="table u-table--v3 g-color-black">
+      <thead>
+          <tr>
+              <th>
+
+                  <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                     asp-route-currentFilter="@Model.CurrentFilter">
+                      @Html.DisplayNameFor(model => model.House[0].Address1)
+                  </a>
+              </th>
+
+              <th class="d-none d-sm-table-cell">
+                  @Html.DisplayNameFor(model => model.House[0].Tenant1)
+              </th>
+              <th class="d-none d-sm-table-cell">
+                  <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
+                     asp-route-currentFilter="@Model.CurrentFilter">
+                      @Html.DisplayNameFor(model => model.House[0].DateFrom)
+                  </a>
+              </th>
+
+              <th>
+                  Rent
+              </th>
+              <th class="d-none d-sm-table-cell">
+                  Deposit
+              </th>
+              <th class="d-none d-sm-table-cell">
+                  Mobile
+              </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          @foreach (var item in Model.House)
+          {
+              <tr>
+                  <td>
+                      @Html.DisplayFor(modelItem => item.Address1)
+                  </td>
+
+                  <td class="d-none d-sm-table-cell">
+                      @Html.DisplayFor(modelItem => item.Tenant1)
+                  </td>
+
+                  <td class="d-none d-sm-table-cell">
+                      @String.Format("{0:dd/MM/yyyy}", item.DateFrom)
+                  </td>
+                  <td>
+                      @String.Format("{0:C}", item.Rent)
+                  </td>
+                  <td class="d-none d-sm-table-cell">
+                      @String.Format("{0:C}", item.Deposit)
+                  </td>
+                  <td class="d-none d-sm-table-cell">
+                      @Html.DisplayFor(modelItem => item.Mobile)
+                  </td>
+
+                  <td  style="text-align: right">
+                      <a asp-page="./Edit" asp-route-id="@item.Id" title="Edit"><i class="fa fa-edit"></i></a>
+                  </td>
+                  <td class="d-none d-sm-table-cell" style="text-align: right">
+                     <a asp-page="./Details" asp-route-id="@item.Id" title="Print"><i class="fas fa-print"></i></a>
+                  </td>
+                  <td style="text-align: right">
+                      <a asp-page="./Delete" asp-route-id="@item.Id" title="Delete"><i class="far fa-trash-alt"></i></a>
+                  </td>
+              </tr>
+          }
+      </tbody>
+  </table>
+</div>
+
+@{
+    var prevDisabled = !Model.House.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.House.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.House.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.House.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>

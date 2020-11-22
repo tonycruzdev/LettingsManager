@@ -1,0 +1,42 @@
+﻿@page "/deleteLandlord/{id:int}"
+
+<div class="card mb-2">
+    <div class="card-header text-white bg-danger">
+        <h5>Delete Details</h5>
+    </div>
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Landlord.Id" />
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <div class="input-group">
+                <label class="form-control">@Landlord.Name</label>
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-tie"></span></span>
+                </div>
+
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label asp-for="Landlord.Address1" disabled class="control-label"></label>
+            <div class="input-group">
+                <label class="form-control">@Landlord.Address1</label>
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col">
+                <button @onclick="HandleVilidDelete" class="btn btn-danger">Delete Landlord</button>
+            </div>
+            <div class="col pull-right">
+                <a href="landlordlist" class="btn btn-primary float-right">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

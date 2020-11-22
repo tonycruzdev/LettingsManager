@@ -1,0 +1,203 @@
+﻿@page "/editHouse/{id:int}"
+
+
+
+<EditForm Model="@House" OnInvalidSubmit="@HandleVilideSubmit" >
+    <div class="row">
+
+        <div class="col">
+            <div class="card mb-2">
+                <div class="card-header">
+                    <h5>Edit Home</h5>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="form-group">
+                        <label class="control-label">Address</label>
+                        <div class="input-group">
+                            <InputText id="Address1" @bind-Value="@House.Address1" placeholder="address" class="form-control" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                            </div>
+                        </div>
+                        <ValidationMessage class="text-danger" For="@(() => House.Address1)" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <InputText InputText id="Address2" @bind-Value="@House.Address2" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => House.Address2)" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <InputText InputText id="Address3" @bind-Value="@House.Address3" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => House.Address3)" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <InputText InputText id="Address4" @bind-Value="@House.Address4" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => House.Address4)" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <InputText InputText id="Address5" @bind-Value="@House.Address5" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => House.Address5)" />
+                        </div>
+                    </div>
+                    <hr style="margin:6px" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Tenant</label>
+                            <div class="input-group">
+                                <InputText InputText id="Tenant1" @bind-Value="@House.Tenant1" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-edit"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => House.Tenant1)" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Tenant2" class="control-label">Tenant 2</label>
+                            <div class="input-group">
+                                <InputText id="Tenant1" @bind-Value="@House.Tenant2" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-edit"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => House.Tenant1)" />
+                        </div>
+                    </div>
+                    <hr style="margin:6px" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Date from</label>
+                            <div class="input-group date" data-provide="datepicker">
+                                <InputDate @bind-Value="House.DateFrom" class="form-control"/>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-calendar"></span></span>
+                                </div>
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => House.DateFrom)" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.DateTo" class="control-label">End Contract</label>
+                            <div class="input-group date" data-provide="datepicker">
+                                <InputDate @bind-Value="House.DateTo" type="text"  class="form-control"/>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-calendar"></span></span>
+                                </div>
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => House.DateFrom)" />
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <label asp-for="House.LandlordId" class="control-label"> Landlord Name</label>
+                    <div class="input-group">
+                        <CustomInputSelect id="LandlordId" class="form-control" @bind-Value="@House.LandlordId">
+                             <option value="0"> Selecte Landlord</option>
+                            @foreach (var lnd in Landlords)
+                            {
+                                <option value="@lnd.Id"> @lnd.Name</option>
+                            }
+                        </CustomInputSelect>
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-tie"></span></span>
+                        </div>
+                    </div>
+                    <ValidationMessage class="text-danger" For="@(() => House.LandlordId)" />
+                </div>
+                <hr style="margin:6px" />
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="House.Rent" class="control-label"></label>
+                        <div class="input-group">
+                            <InputNumber @bind-Value="@House.Rent" asp-for="House.Rent" class="form-control" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2"><span class="fa fa-pound-sign"></span></span>
+                            </div>
+
+                        </div>
+                        <ValidationMessage class="text-danger" For="@(() => House.Rent)" />
+                        <span asp-validation-for="House.Rent" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="House.Deposit" class="control-label"></label>
+                        <div class="input-group">
+                            <InputNumber @bind-Value="@House.Deposit" asp-for="House.Deposit" class="form-control" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2"><span class="fa fa-pound-sign"></span></span>
+                            </div>
+
+                        </div>
+                        <ValidationMessage class="text-danger" For="@(() => House.Deposit)" />
+                    </div>
+                    </div>
+                    <hr style="margin:6px" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Mobile" class="control-label"></label>
+                            <div class="input-group">
+                                <InputText @bind-Value="@House.Mobile" asp-for="House.Mobile" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-mobile-alt"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => House.Mobile)" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Email" class="control-label"></label>
+                            <div class="input-group">
+                                <InputText @bind-Value="@House.Email" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-envelope"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => House.Email)" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+                            <button @onclick="HandleVilideSubmit" class="btn btn-primary">Save</button>
+                        </div>
+                        <div class="col pull-right">
+                            <a href="listhomes" class="btn btn-primary float-right">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</EditForm>

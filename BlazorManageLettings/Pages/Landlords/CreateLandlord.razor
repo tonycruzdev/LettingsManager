@@ -1,0 +1,121 @@
+﻿@page "/addLandlord"
+
+<EditForm Model="@Landlord" OnInvalidSubmit="@HandleVilideSubmit" >
+    <div class="row">
+
+        <div class="col">
+            <div class="card mb-2">
+                <div class="card-header">
+                    <h5>Add Landlord</h5>
+                </div>
+                <div class="card-body">
+                   
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="form-group">
+                        <label class="control-label">Name</label>
+                        <div class="input-group">
+                            <InputText id="name" @bind-Value="@Landlord.Name" placeholder="name" class="form-control" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-tie"></span></span>
+                            </div>
+                        </div>
+                        <ValidationMessage class="text-danger" For="@(() => Landlord.Name)" />
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label class="control-label">Address</label>
+                        <div class="input-group">
+                            <InputText id="Address1" @bind-Value="@Landlord.Address1" placeholder="address" class="form-control" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                            </div>
+                        </div>
+                        <ValidationMessage class="text-danger" For="@(() => Landlord.Address1)" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <InputText InputText id="Address2" @bind-Value="@Landlord.Address2" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => Landlord.Address2)" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <InputText InputText id="Address3" @bind-Value="@Landlord.Address3" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => Landlord.Address3)" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <InputText InputText id="Address4" @bind-Value="@Landlord.Address4" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => Landlord.Address4)" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="input-group">
+                                <InputText InputText id="Address5" @bind-Value="@Landlord.Address5" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="margin:6px" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Mobile" class="control-label"></label>
+                            <div class="input-group">
+                                <InputText @bind-Value="@Landlord.Mobile" asp-for="House.Mobile" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-mobile-alt"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => Landlord.Mobile)" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="House.Email" class="control-label"></label>
+                            <div class="input-group">
+                                <InputText @bind-Value="@Landlord.Email" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-envelope"></span></span>
+                                </div>
+
+                            </div>
+                            <ValidationMessage class="text-danger" For="@(() => Landlord.Email)" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+                            <button @onclick="HandleVilideSubmit" class="btn btn-primary">Save</button>
+                        </div>
+                        <div class="col pull-right">
+                            <a href="landlordlist" class="btn btn-primary float-right">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</EditForm>

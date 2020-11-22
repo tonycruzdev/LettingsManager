@@ -1,0 +1,103 @@
+﻿@page
+@model LettingsManager.WebSite.Landlords.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="card mb-2">
+    <div class="card-header">
+        <h5>Landlord Details</h5>
+    </div>
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Landlord.Id" />
+        <div class="form-group">
+            <label asp-for="Landlord.Name" class="control-label"></label>
+            <div class="input-group">
+                <input asp-for="Landlord.Name" disabled class="form-control" />
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-user-tie"></span></span>
+                </div>
+
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label asp-for="Landlord.Address1" disabled class="control-label"></label>
+            <div class="input-group">
+                <input asp-for="Landlord.Address1" disabled class="form-control" />
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2"><span class="fa fa-road"></span></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col">
+                @*<input type="submit" value="Save" class="btn btn-primary" />*@
+                <a asp-page="./Edit" asp-route-id="@Model.Landlord.Id" class="btn btn-primary">Edit Landlord</a>
+            </div>
+            <div class="col pull-right">
+                <a asp-page="./Index" class="btn btn-primary float-right">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive g-mb-40">
+  <table class="table">
+      <thead>
+          <tr>
+              <th>
+                  Address1
+              </th>
+              <th class="d-none d-sm-table-cell">
+                 Tenant1
+              </th>
+              <th class="d-none d-sm-table-cell">
+                DateFrom
+              </th>
+
+              <th>
+                  Rent
+              </th>
+              <th class="d-none d-sm-table-cell">
+                  Deposit
+              </th>
+              <th class="d-none d-sm-table-cell">
+                  Mobile
+              </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          @foreach (var item in Model.Landlord.Houses)
+          {
+              <tr>
+                  <td>
+                      @Html.DisplayFor(modelItem => item.Address1)
+                  </td>
+
+                  <td class="d-none d-sm-table-cell">
+                      @Html.DisplayFor(modelItem => item.Tenant1)
+                  </td>
+
+                  <td class="d-none d-sm-table-cell">
+                      @String.Format("{0:dd/MM/yyyy}", item.DateFrom)
+                  </td>
+                  <td>
+                      @String.Format("{0:C}", item.Rent)
+                  </td>
+                  <td class="d-none d-sm-table-cell">
+                      @String.Format("{0:C}", item.Deposit)
+                  </td>
+                  <td class="d-none d-sm-table-cell">
+                      @Html.DisplayFor(modelItem => item.Mobile)
+                  </td>
+              </tr>
+          }
+      </tbody>
+  </table>
+</div>

@@ -1,0 +1,107 @@
+﻿@page "/landlordlist"
+
+<style>
+    a {
+        cursor: pointer;
+    }
+</style>
+<div class="card mb-2">
+    <div class="card-header">
+        <h3>Landlord list</h3>
+    </div>
+</div>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <button @onclick="AddnewHome" class="btn btn-primary" type="button" id="button-addon1"><i class="fa fa-plus-circle"></i></button>
+        <button @onclick="Search" class="btn btn-primary"><i class="fas fa-search"></i></button>
+    </div>
+    <input type="text" @bind-value="@Searchtxt" class="form-control" placeholder="Address or Landlord">
+</div>
+@if (IsLoading)
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary spinner-border-lg" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+        
+
+        }
+        else
+        {
+        <div class="table-responsive g-mb-40">
+
+
+            <table class="table u-table--v3 g-color-black">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th class="d-none d-sm-table-cell">Address</th>
+                        <th class="d-none d-sm-table-cell">Mobile</th>
+                        <th class="d-none d-sm-table-cell">email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ManagePagination.DisplaySource)
+                    {
+                        <tr>
+                            <td>
+                                @item.Name
+                            </td>
+
+                            <td class="d-none d-sm-table-cell">
+                                @item.Address1
+                            </td>
+
+                            <td class="d-none d-sm-table-cell">
+                                @item.Mobile
+                            </td>
+                            <td class="d-none d-sm-table-cell">
+                                @item.Email
+                            </td>
+                            <td style="text-align: right">
+                                <a href="editLandlord/@item.Id" title="Edit"><i class="fa fa-edit"></i></a>
+                            </td>
+                            <td style="text-align: right">
+                                <a href="landlordDetail/@item.Id" title="Details"><i class="fas fa-th"></i></a>
+                            </td>
+                            <td style="text-align: right">
+                                <a href="deleteLandlord/@item.Id" title="Delete"><i class="far fa-trash-alt" style="color:red"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        @if (ManagePagination.PageCount>  0)
+                {
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        @if (ManagePagination.CurrentPage == 0)
+                        {
+                            <li class="page-item disabled"><a class="page-link">First</a></li>
+                            <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                            <li class="page-item"><a class="page-link" @onclick="ManagePagination.NextPage">Next</a></li>
+                            <li class="page-item"><a class="page-link" @onclick="ManagePagination.LastPage">Last</a></li>
+                        }
+                        else if (ManagePagination.CurrentPage > 0 && ManagePagination.CurrentPage <= ManagePagination.PageCount - 2)
+                        {
+                            <li class="page-item"><a class="page-link" @onclick="ManagePagination.FirstPage">First</a></li>
+                            <li class="page-item"><a class="page-link" @onclick="ManagePagination.PreviousPage">Previous</a></li>
+                            <li class="page-item"><a class="page-link" @onclick="ManagePagination.NextPage">Next</a></li>
+                            <li class="page-item"><a class="page-link" @onclick="ManagePagination.LastPage">Last</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a class="page-link" @onclick="ManagePagination.FirstPage">First</a></li>
+                            <li class="page-item"><a class="page-link" @onclick="ManagePagination.PreviousPage">Previous</a></li>
+                            <li class="page-item disabled"><a class="page-link" @onclick="ManagePagination.NextPage">Next</a></li>
+                            <li class="page-item disabled"><a class="page-link" @onclick="ManagePagination.LastPage">Last</a></li>
+                        }
+                    </ul>
+                </nav>
+          }
+
+  </div>
+}
