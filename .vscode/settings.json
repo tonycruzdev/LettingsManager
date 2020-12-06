@@ -1,0 +1,5 @@
+{
+    "staticWebApps.appSubpath": "BlazorManageLettings",
+    "staticWebApps.apiSubpath": "BlazorManageLettings",
+    "staticWebApps.appArtifactSubpath": "build"
+}
